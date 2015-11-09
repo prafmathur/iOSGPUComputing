@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F8330ED21BF050B400DD5B9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330ED11BF050B400DD5B9E /* AppDelegate.swift */; };
+		F8330ED41BF050B400DD5B9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330ED31BF050B400DD5B9E /* ViewController.swift */; };
+		F8330ED71BF050B400DD5B9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8330ED51BF050B400DD5B9E /* Main.storyboard */; };
+		F8330ED91BF050B400DD5B9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8330ED81BF050B400DD5B9E /* Assets.xcassets */; };
+		F8330EDC1BF050B400DD5B9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8330EDA1BF050B400DD5B9E /* LaunchScreen.storyboard */; };
+		F8330EE71BF050B400DD5B9E /* iOSGPUComputingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330EE61BF050B400DD5B9E /* iOSGPUComputingTests.swift */; };
+		F8330EF21BF050B400DD5B9E /* iOSGPUComputingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330EF11BF050B400DD5B9E /* iOSGPUComputingUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F8330EE31BF050B400DD5B9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8330EC61BF050B400DD5B9E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8330ECD1BF050B400DD5B9E;
+			remoteInfo = iOSGPUComputing;
+		};
+		F8330EEE1BF050B400DD5B9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8330EC61BF050B400DD5B9E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8330ECD1BF050B400DD5B9E;
+			remoteInfo = iOSGPUComputing;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F8330ECE1BF050B400DD5B9E /* iOSGPUComputing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSGPUComputing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8330ED11BF050B400DD5B9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F8330ED31BF050B400DD5B9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F8330ED61BF050B400DD5B9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F8330ED81BF050B400DD5B9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F8330EDB1BF050B400DD5B9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F8330EDD1BF050B400DD5B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8330EE21BF050B400DD5B9E /* iOSGPUComputingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSGPUComputingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8330EE61BF050B400DD5B9E /* iOSGPUComputingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSGPUComputingTests.swift; sourceTree = "<group>"; };
+		F8330EE81BF050B400DD5B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8330EED1BF050B400DD5B9E /* iOSGPUComputingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSGPUComputingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8330EF11BF050B400DD5B9E /* iOSGPUComputingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSGPUComputingUITests.swift; sourceTree = "<group>"; };
+		F8330EF31BF050B400DD5B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F8330ECB1BF050B400DD5B9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8330EDF1BF050B400DD5B9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8330EEA1BF050B400DD5B9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F8330EC51BF050B400DD5B9E = {
+			isa = PBXGroup;
+			children = (
+				F8330ED01BF050B400DD5B9E /* iOSGPUComputing */,
+				F8330EE51BF050B400DD5B9E /* iOSGPUComputingTests */,
+				F8330EF01BF050B400DD5B9E /* iOSGPUComputingUITests */,
+				F8330ECF1BF050B400DD5B9E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F8330ECF1BF050B400DD5B9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F8330ECE1BF050B400DD5B9E /* iOSGPUComputing.app */,
+				F8330EE21BF050B400DD5B9E /* iOSGPUComputingTests.xctest */,
+				F8330EED1BF050B400DD5B9E /* iOSGPUComputingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F8330ED01BF050B400DD5B9E /* iOSGPUComputing */ = {
+			isa = PBXGroup;
+			children = (
+				F8330ED11BF050B400DD5B9E /* AppDelegate.swift */,
+				F8330ED31BF050B400DD5B9E /* ViewController.swift */,
+				F8330ED51BF050B400DD5B9E /* Main.storyboard */,
+				F8330ED81BF050B400DD5B9E /* Assets.xcassets */,
+				F8330EDA1BF050B400DD5B9E /* LaunchScreen.storyboard */,
+				F8330EDD1BF050B400DD5B9E /* Info.plist */,
+			);
+			path = iOSGPUComputing;
+			sourceTree = "<group>";
+		};
+		F8330EE51BF050B400DD5B9E /* iOSGPUComputingTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8330EE61BF050B400DD5B9E /* iOSGPUComputingTests.swift */,
+				F8330EE81BF050B400DD5B9E /* Info.plist */,
+			);
+			path = iOSGPUComputingTests;
+			sourceTree = "<group>";
+		};
+		F8330EF01BF050B400DD5B9E /* iOSGPUComputingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F8330EF11BF050B400DD5B9E /* iOSGPUComputingUITests.swift */,
+				F8330EF31BF050B400DD5B9E /* Info.plist */,
+			);
+			path = iOSGPUComputingUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F8330ECD1BF050B400DD5B9E /* iOSGPUComputing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8330EF61BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputing" */;
+			buildPhases = (
+				F8330ECA1BF050B400DD5B9E /* Sources */,
+				F8330ECB1BF050B400DD5B9E /* Frameworks */,
+				F8330ECC1BF050B400DD5B9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOSGPUComputing;
+			productName = iOSGPUComputing;
+			productReference = F8330ECE1BF050B400DD5B9E /* iOSGPUComputing.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F8330EE11BF050B400DD5B9E /* iOSGPUComputingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8330EF91BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputingTests" */;
+			buildPhases = (
+				F8330EDE1BF050B400DD5B9E /* Sources */,
+				F8330EDF1BF050B400DD5B9E /* Frameworks */,
+				F8330EE01BF050B400DD5B9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8330EE41BF050B400DD5B9E /* PBXTargetDependency */,
+			);
+			name = iOSGPUComputingTests;
+			productName = iOSGPUComputingTests;
+			productReference = F8330EE21BF050B400DD5B9E /* iOSGPUComputingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F8330EEC1BF050B400DD5B9E /* iOSGPUComputingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8330EFC1BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputingUITests" */;
+			buildPhases = (
+				F8330EE91BF050B400DD5B9E /* Sources */,
+				F8330EEA1BF050B400DD5B9E /* Frameworks */,
+				F8330EEB1BF050B400DD5B9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8330EEF1BF050B400DD5B9E /* PBXTargetDependency */,
+			);
+			name = iOSGPUComputingUITests;
+			productName = iOSGPUComputingUITests;
+			productReference = F8330EED1BF050B400DD5B9E /* iOSGPUComputingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F8330EC61BF050B400DD5B9E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Praf;
+				TargetAttributes = {
+					F8330ECD1BF050B400DD5B9E = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					F8330EE11BF050B400DD5B9E = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = F8330ECD1BF050B400DD5B9E;
+					};
+					F8330EEC1BF050B400DD5B9E = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = F8330ECD1BF050B400DD5B9E;
+					};
+				};
+			};
+			buildConfigurationList = F8330EC91BF050B400DD5B9E /* Build configuration list for PBXProject "iOSGPUComputing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F8330EC51BF050B400DD5B9E;
+			productRefGroup = F8330ECF1BF050B400DD5B9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F8330ECD1BF050B400DD5B9E /* iOSGPUComputing */,
+				F8330EE11BF050B400DD5B9E /* iOSGPUComputingTests */,
+				F8330EEC1BF050B400DD5B9E /* iOSGPUComputingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F8330ECC1BF050B400DD5B9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8330EDC1BF050B400DD5B9E /* LaunchScreen.storyboard in Resources */,
+				F8330ED91BF050B400DD5B9E /* Assets.xcassets in Resources */,
+				F8330ED71BF050B400DD5B9E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8330EE01BF050B400DD5B9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8330EEB1BF050B400DD5B9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F8330ECA1BF050B400DD5B9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8330ED41BF050B400DD5B9E /* ViewController.swift in Sources */,
+				F8330ED21BF050B400DD5B9E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8330EDE1BF050B400DD5B9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8330EE71BF050B400DD5B9E /* iOSGPUComputingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8330EE91BF050B400DD5B9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8330EF21BF050B400DD5B9E /* iOSGPUComputingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F8330EE41BF050B400DD5B9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F8330ECD1BF050B400DD5B9E /* iOSGPUComputing */;
+			targetProxy = F8330EE31BF050B400DD5B9E /* PBXContainerItemProxy */;
+		};
+		F8330EEF1BF050B400DD5B9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F8330ECD1BF050B400DD5B9E /* iOSGPUComputing */;
+			targetProxy = F8330EEE1BF050B400DD5B9E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F8330ED51BF050B400DD5B9E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F8330ED61BF050B400DD5B9E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F8330EDA1BF050B400DD5B9E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F8330EDB1BF050B400DD5B9E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F8330EF41BF050B400DD5B9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F8330EF51BF050B400DD5B9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F8330EF71BF050B400DD5B9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = iOSGPUComputing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Praf.iOSGPUComputing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F8330EF81BF050B400DD5B9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = iOSGPUComputing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Praf.iOSGPUComputing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F8330EFA1BF050B400DD5B9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iOSGPUComputingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Praf.iOSGPUComputingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSGPUComputing.app/iOSGPUComputing";
+			};
+			name = Debug;
+		};
+		F8330EFB1BF050B400DD5B9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iOSGPUComputingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Praf.iOSGPUComputingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSGPUComputing.app/iOSGPUComputing";
+			};
+			name = Release;
+		};
+		F8330EFD1BF050B400DD5B9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = iOSGPUComputingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Praf.iOSGPUComputingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = iOSGPUComputing;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		F8330EFE1BF050B400DD5B9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = iOSGPUComputingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Praf.iOSGPUComputingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = iOSGPUComputing;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F8330EC91BF050B400DD5B9E /* Build configuration list for PBXProject "iOSGPUComputing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8330EF41BF050B400DD5B9E /* Debug */,
+				F8330EF51BF050B400DD5B9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8330EF61BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8330EF71BF050B400DD5B9E /* Debug */,
+				F8330EF81BF050B400DD5B9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F8330EF91BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8330EFA1BF050B400DD5B9E /* Debug */,
+				F8330EFB1BF050B400DD5B9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F8330EFC1BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8330EFD1BF050B400DD5B9E /* Debug */,
+				F8330EFE1BF050B400DD5B9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F8330EC61BF050B400DD5B9E /* Project object */;
+}
