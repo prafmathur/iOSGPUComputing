@@ -14,6 +14,8 @@
 		F8330EDC1BF050B400DD5B9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8330EDA1BF050B400DD5B9E /* LaunchScreen.storyboard */; };
 		F8330EE71BF050B400DD5B9E /* iOSGPUComputingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330EE61BF050B400DD5B9E /* iOSGPUComputingTests.swift */; };
 		F8330EF21BF050B400DD5B9E /* iOSGPUComputingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330EF11BF050B400DD5B9E /* iOSGPUComputingUITests.swift */; };
+		F8330F001BF0510800DD5B9E /* Kernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = F8330EFF1BF0510800DD5B9E /* Kernel.metal */; };
+		F8330F021BF1AF9600DD5B9E /* monkey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8330F011BF1AF9600DD5B9E /* monkey.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		F8330EED1BF050B400DD5B9E /* iOSGPUComputingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSGPUComputingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8330EF11BF050B400DD5B9E /* iOSGPUComputingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSGPUComputingUITests.swift; sourceTree = "<group>"; };
 		F8330EF31BF050B400DD5B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8330EFF1BF0510800DD5B9E /* Kernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Kernel.metal; sourceTree = "<group>"; };
+		F8330F011BF1AF9600DD5B9E /* monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = monkey.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +103,9 @@
 			children = (
 				F8330ED11BF050B400DD5B9E /* AppDelegate.swift */,
 				F8330ED31BF050B400DD5B9E /* ViewController.swift */,
+				F8330EFF1BF0510800DD5B9E /* Kernel.metal */,
 				F8330ED51BF050B400DD5B9E /* Main.storyboard */,
+				F8330F011BF1AF9600DD5B9E /* monkey.jpg */,
 				F8330ED81BF050B400DD5B9E /* Assets.xcassets */,
 				F8330EDA1BF050B400DD5B9E /* LaunchScreen.storyboard */,
 				F8330EDD1BF050B400DD5B9E /* Info.plist */,
@@ -229,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8330F021BF1AF9600DD5B9E /* monkey.jpg in Resources */,
 				F8330EDC1BF050B400DD5B9E /* LaunchScreen.storyboard in Resources */,
 				F8330ED91BF050B400DD5B9E /* Assets.xcassets in Resources */,
 				F8330ED71BF050B400DD5B9E /* Main.storyboard in Resources */,
@@ -257,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8330ED41BF050B400DD5B9E /* ViewController.swift in Sources */,
+				F8330F001BF0510800DD5B9E /* Kernel.metal in Sources */,
 				F8330ED21BF050B400DD5B9E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +492,7 @@
 				F8330EF81BF050B400DD5B9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8330EF91BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputingTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +501,7 @@
 				F8330EFB1BF050B400DD5B9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8330EFC1BF050B400DD5B9E /* Build configuration list for PBXNativeTarget "iOSGPUComputingUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +510,7 @@
 				F8330EFE1BF050B400DD5B9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
