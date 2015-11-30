@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8263EA21C04D369003175B5 /* monkey2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8263EA11C04D369003175B5 /* monkey2.jpg */; };
 		F8330ED21BF050B400DD5B9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330ED11BF050B400DD5B9E /* AppDelegate.swift */; };
 		F8330ED41BF050B400DD5B9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330ED31BF050B400DD5B9E /* ViewController.swift */; };
 		F8330ED71BF050B400DD5B9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8330ED51BF050B400DD5B9E /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F8263EA11C04D369003175B5 /* monkey2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = monkey2.jpg; sourceTree = SOURCE_ROOT; };
 		F8330ECE1BF050B400DD5B9E /* iOSGPUComputing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSGPUComputing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8330ED11BF050B400DD5B9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8330ED31BF050B400DD5B9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				F8330EFF1BF0510800DD5B9E /* Kernel.metal */,
 				F8330ED51BF050B400DD5B9E /* Main.storyboard */,
 				F8330F011BF1AF9600DD5B9E /* monkey.jpg */,
+				F8263EA11C04D369003175B5 /* monkey2.jpg */,
 				F8330ED81BF050B400DD5B9E /* Assets.xcassets */,
 				F8330EDA1BF050B400DD5B9E /* LaunchScreen.storyboard */,
 				F8330EDD1BF050B400DD5B9E /* Info.plist */,
@@ -238,6 +241,7 @@
 				F8330F021BF1AF9600DD5B9E /* monkey.jpg in Resources */,
 				F8330EDC1BF050B400DD5B9E /* LaunchScreen.storyboard in Resources */,
 				F8330ED91BF050B400DD5B9E /* Assets.xcassets in Resources */,
+				F8263EA21C04D369003175B5 /* monkey2.jpg in Resources */,
 				F8330ED71BF050B400DD5B9E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

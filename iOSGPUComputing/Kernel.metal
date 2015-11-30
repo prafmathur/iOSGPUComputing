@@ -27,7 +27,7 @@ int difSq(int a, int b) {
 
 
 kernel void getRGB(const device int *pixel[[ buffer(0) ]],
-                   device int *assignment [[buffer(1)]],
+                   device uint32_t *assignment [[buffer(1)]],
                    const device int *means [[buffer(2)]],
                    uint id [[ thread_position_in_grid ]]) {
 
@@ -37,10 +37,10 @@ kernel void getRGB(const device int *pixel[[ buffer(0) ]],
     uint8_t B = (pix & 0x00ff0000) >> 16;
     uint8_t A = (pix & 0xff000000) >> 24;
     
+    int k = 5;
+    int distances[k];
     
-    int distances[8];
-    
-    for(int i = 0; i < 8; i++) {
+    for(int i = 0; i < k; i++) {
         int mean = means[i];
         uint8_t meanR = (mean & 0x000000ff);
         uint8_t meanG = (mean & 0x0000ff00) >> 8;
@@ -51,9 +51,9 @@ kernel void getRGB(const device int *pixel[[ buffer(0) ]],
         
     }
     
-    int assignedMean = 0;
+    uint32_t assignedMean = 0;
     int minDistance = distances[0];
-    for (int i = 1; i < 8; ++i) {
+    for (int i = 1; i < k; ++i) {
         if (distances[i] < minDistance) {
             minDistance = distances[i];
             assignedMean = i;
@@ -84,4 +84,12 @@ kernel void updateMeans(const device int *pixel[[ buffer(0) ]],
         //meanSums[idx*4 + i] += RGBA[i];
         atomic_fetch_add_explicit(&meanSums[idx*4 + i], RGBA[i], memory_order_relaxed);
     }
+}
+
+
+kernel void updateImage(const device int *assignment [[buffer(0)]],
+                   const device int *means [[buffer(1)]],
+                   device int *outpixel[[ buffer(2) ]],
+                   uint id [[ thread_position_in_grid ]]) {
+    outpixel[id] = means[assignment[id]];
 }
