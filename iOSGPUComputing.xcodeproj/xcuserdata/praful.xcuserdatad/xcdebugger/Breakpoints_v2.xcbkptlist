@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSGPUComputing/Kernel.metal"
-            timestampString = "470080478.521071"
+            timestampString = "471291425.110457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "getRGB(const device int *pixel[[ buffer(0) ]], device uint32_t *assignment [[buffer(1)]], const device int *means [[buffer(2)]], uint id [[ thread_position_in_grid ]])"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getRGB(const device int *pixel[[ buffer(0) ]], device uint32_t *assignment [[buffer(1)]], constant int *means [[buffer(2)]], uint id [[ thread_position_in_grid ]])"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +26,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSGPUComputing/ViewController.swift"
-            timestampString = "470092004.397865"
+            timestampString = "471293487.988483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "updateImage()"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSGPUComputing/Kernel.metal"
+            timestampString = "471290625.676246"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "difSq(int a, int b)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSGPUComputing/ViewController.swift"
-            timestampString = "470092004.397865"
+            timestampString = "471293487.988483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "computeDistances()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

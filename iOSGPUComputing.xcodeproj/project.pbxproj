@@ -17,6 +17,7 @@
 		F8330EF21BF050B400DD5B9E /* iOSGPUComputingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8330EF11BF050B400DD5B9E /* iOSGPUComputingUITests.swift */; };
 		F8330F001BF0510800DD5B9E /* Kernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = F8330EFF1BF0510800DD5B9E /* Kernel.metal */; };
 		F8330F021BF1AF9600DD5B9E /* monkey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8330F011BF1AF9600DD5B9E /* monkey.jpg */; };
+		F8D1E1601C0E10FA00AB393D /* ocean.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8D1E15F1C0E10FA00AB393D /* ocean.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		F8330EF31BF050B400DD5B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8330EFF1BF0510800DD5B9E /* Kernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Kernel.metal; sourceTree = "<group>"; };
 		F8330F011BF1AF9600DD5B9E /* monkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = monkey.jpg; sourceTree = "<group>"; };
+		F8D1E15F1C0E10FA00AB393D /* ocean.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ocean.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				F8330ED11BF050B400DD5B9E /* AppDelegate.swift */,
 				F8330ED31BF050B400DD5B9E /* ViewController.swift */,
+				F8D1E15F1C0E10FA00AB393D /* ocean.jpg */,
 				F8330EFF1BF0510800DD5B9E /* Kernel.metal */,
 				F8330ED51BF050B400DD5B9E /* Main.storyboard */,
 				F8330F011BF1AF9600DD5B9E /* monkey.jpg */,
@@ -242,6 +245,7 @@
 				F8330EDC1BF050B400DD5B9E /* LaunchScreen.storyboard in Resources */,
 				F8330ED91BF050B400DD5B9E /* Assets.xcassets in Resources */,
 				F8263EA21C04D369003175B5 /* monkey2.jpg in Resources */,
+				F8D1E1601C0E10FA00AB393D /* ocean.jpg in Resources */,
 				F8330ED71BF050B400DD5B9E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

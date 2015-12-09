@@ -17,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="monkey2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="FRS-zh-xCC">
-                                <rect key="frame" x="43" y="49" width="234" height="214"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ocean.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="FRS-zh-xCC">
+                                <rect key="frame" x="0.0" y="49" width="320" height="398"/>
                                 <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a5s-tM-4T9">
-                                <rect key="frame" x="43" y="305" width="80" height="30"/>
+                                <rect key="frame" x="43" y="518" width="80" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Load Image"/>
                                 <connections>
@@ -30,11 +30,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhn-cH-rOj">
-                                <rect key="frame" x="222" y="305" width="55" height="30"/>
+                                <rect key="frame" x="222" y="518" width="55" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Process"/>
                                 <connections>
                                     <action selector="process:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dU0-UX-NLS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qB-sC-5w8">
+                                <rect key="frame" x="138" y="469" width="45" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Iterate"/>
+                                <connections>
+                                    <action selector="iterate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t98-vG-Kis"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -52,6 +60,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="monkey2.jpg" width="256" height="256"/>
+        <image name="ocean.jpg" width="650" height="433"/>
     </resources>
 </document>
