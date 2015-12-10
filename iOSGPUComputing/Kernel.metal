@@ -57,8 +57,6 @@ kernel void getRGB(const device int *pixel[[ buffer(0) ]],
     }
     assignment[id] = assignedMean;
     
-    
-    
 }
 
 kernel void updateMeans(const device int *pixel[[ buffer(0) ]],
