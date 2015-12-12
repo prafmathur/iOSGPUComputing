@@ -17,7 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var picture: UIImageView!
 
     // Number of means
-    let k = 16
+    let k = 8
     
     // Metal GPU Objects
     var device: MTLDevice!
@@ -47,7 +47,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         initMeans()
         for _ in 0...7{
             computeDistances()
-            updateMeansSerial()
+            updateMeans()
         }
         updateImage()
         
@@ -58,7 +58,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             initMeans()
         }
         computeDistances()
-        updateMeansOptimized()
+        updateMeans()
         updateImage()
     }
     
@@ -186,7 +186,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let imgForUpdate = device?.newBufferWithBytes(imgdata, length: imgBufferSize, options: MTLResourceOptions.StorageModeShared)
 
         let assignmentsBuffer = device.newBufferWithBytes(&assign, length: assignmentBufferSize, options: MTLResourceOptions.StorageModeShared)
-        let meanSumsBuffer = device.newBufferWithBytes(&meanSums, length: 32 * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
+        let meanSumsBuffer = device.newBufferWithBytes(&meanSums, length: k * 4 * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
         let meanCountsBuffer = device.newBufferWithBytes(&meanCounts, length: k * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
         
         computeCommandEncoder?.setBuffer(imgForUpdate, offset: 0, atIndex: 0)
@@ -233,15 +233,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let countData = NSData(bytesNoCopy: meanCountsBuffer.contents(), length: k * sizeof(UInt32), freeWhenDone: false)
         countData.getBytes(&meanCounts, length: k * sizeof(UInt32))
         
-        for i in 0...k {
-            if meanCounts[i/4] != 0 {
-                let updatedMean = (meanSums[i] + serialSums[i]) / (meanCounts[i/4] + serialCounts[i/4])
-                means[i] = UInt8(updatedMean)
+        for i in 0..<k {
+            if meanCounts[i] != 0 {
+                for j in 0...3 {
+                    let totalSum = meanSums[i*4+j] + serialSums[i*4+j]
+                    let totalCounts = meanCounts[i] + serialCounts[i]
+                    means[i*4+j] = UInt8(totalSum / totalCounts)
+                }
             }
             else {
-                means[i] = imgdata[Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4]
+                let randomPixel = Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4
+                for j in 0...3 {
+                    means[i*4+j] = imgdata[randomPixel + j]
+                }
             }
         }
+
         let end = CACurrentMediaTime()
         print("Total Time for Means \(end - middle)")
     }
@@ -250,13 +257,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func updateMeans() {
         let middle = CACurrentMediaTime()
-
+        
         var computePipelineFilter: MTLComputePipelineState? = nil
         do {
             computePipelineFilter  = try device?.newComputePipelineStateWithFunction(updateMeansMtl!)
         }
-        catch {
-            
+        catch let error as NSError {
+            print(error.localizedDescription)
         }
         let commandBuffer = commandQueue?.commandBuffer()
         let computeCommandEncoder = commandBuffer?.computeCommandEncoder()
@@ -266,18 +273,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         assign = assignments
         var meanSums = [UInt32](count: k*4, repeatedValue: 0)
         var meanCounts = [UInt32](count: k, repeatedValue: 0)
-
+        var nPixels = [UInt32(numPixelsInImage)]
+        
         let assignmentsBuffer = device.newBufferWithBytes(&assign, length: assign.count * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
         let meanSumsBuffer = device.newBufferWithBytes(&meanSums, length: k * 4 * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
         let meanCountsBuffer = device.newBufferWithBytes(&meanCounts, length: k * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
-        
+        let numPixelsBuffer = device.newBufferWithBytes(&nPixels, length: sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
+
         computeCommandEncoder?.setBuffer(inBuffer, offset: 0, atIndex: 0)
         computeCommandEncoder?.setBuffer(assignmentsBuffer, offset: 0, atIndex: 1)
         computeCommandEncoder?.setBuffer(meanSumsBuffer, offset: 0, atIndex: 2)
         computeCommandEncoder?.setBuffer(meanCountsBuffer, offset: 0, atIndex: 3)
+        computeCommandEncoder?.setBuffer(numPixelsBuffer, offset: 0, atIndex: 4)
         
         let threadsPerGroup = MTLSize(width: 32, height: 1, depth: 1)
-        let numThreadGroups = MTLSize(width: ((numPixelsInImage) + 31)/32, height: 1, depth: 1)
+        let numThreadGroups = MTLSize(width: 16, height: 1, depth: 1)
         computeCommandEncoder?.dispatchThreadgroups(numThreadGroups, threadsPerThreadgroup: threadsPerGroup)
         computeCommandEncoder?.endEncoding()
 
@@ -294,13 +304,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let countData = NSData(bytesNoCopy: meanCountsBuffer.contents(), length: k * sizeof(UInt32), freeWhenDone: false)
         countData.getBytes(&meanCounts, length: k * sizeof(UInt32))
         
-        for i in 0...k {
-            if meanCounts[i/4] != 0 {
-                let updatedMean = meanSums[i]/meanCounts[i/4]
-                means[i] = UInt8(updatedMean)
+        for i in 0..<k {
+            if meanCounts[i] != 0 {
+                for j in 0...2 {
+                    let x = meanSums[i*4+j] / meanCounts[i]
+                    means[i*4+j] = UInt8(meanSums[i*4+j] / meanCounts[i])
+                }
             }
             else {
-                means[i] = imgdata[Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4]
+                let randomPixel = Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4
+                for j in 0...3 {
+                    means[i*4+j] = imgdata[randomPixel + j]
+                }
             }
         }
         let end = CACurrentMediaTime()
@@ -344,8 +359,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let data = NSData(bytesNoCopy: imgBuffer!.contents(), length: lengthOfData, freeWhenDone: false)
         data.getBytes(&resultData, length: lengthOfData)
     
-        let width = Int((picture.image?.size.width)!)
-        let height = Int((picture.image?.size.height)!)
+        let w = Int((picture.image?.size.width)!)
+        let h = Int((picture.image?.size.height)!)
+        let width = max(w,h)
+        let height = min(w,h)
         let bitsPerComponent:Int = 8
         let bitsPerPixel:Int = 32
         let providerRef = CGDataProviderCreateWithCFData(CFDataCreate(nil, &resultData, lengthOfData))
@@ -384,13 +401,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 meanSums[Int(assignments[i]) * 4 + j] += UInt32(imgdata[i*4+j])
             }
         }
-        for i in 0...k {
-            if serialCounts[i/4] != 0 {
-                let updatedMean = meanSums[i]/serialCounts[i/4]
-                means[i] = UInt8(updatedMean)
+        
+        for i in 0..<k {
+            if serialCounts[i] != 0 {
+                for j in 0...3 {
+                    means[i*4+j] = UInt8(meanSums[i*4+j] / serialCounts[i])
+                }
             }
             else {
-                means[i] = imgdata[Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4]
+                let randomPixel = Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4
+                for j in 0...3 {
+                    means[i*4+j] = imgdata[randomPixel + j]
+                }
             }
         }
         let end = CACurrentMediaTime()
@@ -400,10 +422,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     func testImageChange() {
-        let width = Int((picture.image?.size.width)!)
-        let height = Int((picture.image?.size.height)!)
+        let w = Int((picture.image?.size.width)!)
+        let h = Int((picture.image?.size.height)!)
+        print("Width: \(w) Height: \(h)")
+        let width = max(w,h)
+        let height = min(w,h)
+        
         let bitsPerComponent:Int = 8
         let bitsPerPixel:Int = 32
+        self.img = picture.image?.CGImage!
+        self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(img))
+        self.imgdata = CFDataGetBytePtr(pixelData)
+        self.lengthOfData = CFDataGetLength(pixelData)
+
         let providerRef = CGDataProviderCreateWithCFData(
             NSData(bytes: imgdata, length: lengthOfData)
         )
