@@ -43,23 +43,50 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Image Picker
     let imagePicker = UIImagePickerController()
     
+    // Number of threads to run on GPU
+    let numGPUthreads = 32;
+    let threadGroupNumForUpdate = 8;
+    
+    
     @IBAction func process(sender: UIButton) {
+        let START = CACurrentMediaTime()
         initMeans()
-        for _ in 0...7{
+        for _ in 0...10 {
             computeDistances()
             updateMeans()
         }
         updateImage()
+        let END = CACurrentMediaTime()
+        print("Total Time for 10 iterations: \(END - START)")
+        
         
     }
     
+    
+    
+    @IBAction func saveImage(sender: AnyObject) {
+        UIImageWriteToSavedPhotosAlbum(picture.image!, self, nil, nil)
+
+    }
+    
     @IBAction func iterate(sender: AnyObject) {
+        let START = CACurrentMediaTime()
         if meansInit == false {
             initMeans()
         }
+        let A = CACurrentMediaTime()
         computeDistances()
+        let B = CACurrentMediaTime()
         updateMeans()
+        let C = CACurrentMediaTime()
         updateImage()
+        let END = CACurrentMediaTime()
+        
+        print(A - START)
+        print(B - A)
+        print(C - B)
+        print(END - C)
+        print(END - START)
     }
     
     @IBAction func loadImage(sender: AnyObject) {
@@ -135,8 +162,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         computeCommandEncoder!.setBuffer(meansBuffer, offset: 0, atIndex: 2)
         // -----------------------------------------------------------------------------
     
-        let threadsPerGroup = MTLSize(width: 32, height: 1, depth: 1)
-        let numThreadGroups = MTLSize(width: (numPixelsInImage + 31)/32, height: 1, depth: 1)
+        let threadsPerGroup = MTLSize(width: numGPUthreads, height: 1, depth: 1)
+        let numThreadGroups = MTLSize(width: (numPixelsInImage + (numGPUthreads-1))/numGPUthreads, height: 1, depth: 1)
         computeCommandEncoder?.dispatchThreadgroups(numThreadGroups, threadsPerThreadgroup: threadsPerGroup)
         computeCommandEncoder?.endEncoding()
         
@@ -144,116 +171,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         commandBuffer?.commit()
         commandBuffer?.waitUntilCompleted()
         let b = CACurrentMediaTime()
-        print("GPU Time For Distances \(b - a)")
+//        print("GPU Time For Distances \(b - a)")
         
         let data = NSData(bytesNoCopy: assignmentsBufferOut!.contents(), length: assignments.count * sizeof(UInt32), freeWhenDone: false)
         data.getBytes(&assign, length: assignments.count * sizeof(UInt32))
         assignments = assign
         
         let end = CACurrentMediaTime()
-        print("Total Time for Distances \(end - start)")
+//        print("Total Time for Distances \(end - start)")
     }
-
-    func updateMeansOptimized() {
-        let middle = CACurrentMediaTime()
-        
-        var computePipelineFilter: MTLComputePipelineState? = nil
-        do {
-            computePipelineFilter  = try device?.newComputePipelineStateWithFunction(updateMeansMtl!)
-        }
-        catch {
-            
-        }
-        
-        // ----------------- Load balancing ------------------------------------------
-        let parallelFraction = 2
-        let imgBufferSize = lengthOfData/parallelFraction
-        let assignmentBufferSize = numPixelsInImage/parallelFraction * sizeof(UInt32)
-        let threadGroupWidth = (numPixelsInImage/parallelFraction + 31)/32
-        let serialStart = assignments.count/parallelFraction
-        //-----------------------------------------------------------------------------
-        
-        let commandBuffer = commandQueue?.commandBuffer()
-        let computeCommandEncoder = commandBuffer?.computeCommandEncoder()
-        computeCommandEncoder?.setComputePipelineState(computePipelineFilter!)
-
-        var assign = [UInt32](count: numPixelsInImage, repeatedValue: 0)
-        assign = assignments
-        var meanSums = [UInt32](count: k*4, repeatedValue: 0)
-        var meanCounts = [UInt32](count: k, repeatedValue: 0)
-        
-        
-        let imgForUpdate = device?.newBufferWithBytes(imgdata, length: imgBufferSize, options: MTLResourceOptions.StorageModeShared)
-
-        let assignmentsBuffer = device.newBufferWithBytes(&assign, length: assignmentBufferSize, options: MTLResourceOptions.StorageModeShared)
-        let meanSumsBuffer = device.newBufferWithBytes(&meanSums, length: k * 4 * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
-        let meanCountsBuffer = device.newBufferWithBytes(&meanCounts, length: k * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
-        
-        computeCommandEncoder?.setBuffer(imgForUpdate, offset: 0, atIndex: 0)
-        computeCommandEncoder?.setBuffer(assignmentsBuffer, offset: 0, atIndex: 1)
-        computeCommandEncoder?.setBuffer(meanSumsBuffer, offset: 0, atIndex: 2)
-        computeCommandEncoder?.setBuffer(meanCountsBuffer, offset: 0, atIndex: 3)
-        
-        let threadsPerGroup = MTLSize(width: 32, height: 1, depth: 1)
-        let numThreadGroups = MTLSize(width: threadGroupWidth, height: 1, depth: 1)
-        computeCommandEncoder?.dispatchThreadgroups(numThreadGroups, threadsPerThreadgroup: threadsPerGroup)
-        computeCommandEncoder?.endEncoding()
-        
-        let a = CACurrentMediaTime()
-        commandBuffer?.commit()
-        
-        //--------------------------------------
-        // While parallel code is running
-        //---------------------------------------
-        let sStart = CACurrentMediaTime()
-        var serialCounts = [UInt32](count: k, repeatedValue: 0)
-        for i in assignments[serialStart..<assignments.count] {
-            serialCounts[Int(i)]++
-        }
-        var serialSums = [UInt32](count: k*4, repeatedValue: 0)
-        
-        for i in serialStart...assignments.count - 1 {
-            
-            for j in 0...3 {
-                serialSums[Int(assignments[i]) * 4 + j] += UInt32(imgdata[i*4+j])
-            }
-            
-        }
-        let sEnd = CACurrentMediaTime()
-        print("Serial code running time \(sEnd - sStart)")
-        //--------------------------------------------
-        commandBuffer?.waitUntilCompleted()
-        let b = CACurrentMediaTime()
-        print("GPU Time For Means\(b - a)")
-        
-        
-        let sumData = NSData(bytesNoCopy: meanSumsBuffer.contents(), length: k * 4 * sizeof(UInt32), freeWhenDone: false)
-        sumData.getBytes(&meanSums, length: k * 4 * sizeof(UInt32))
-        
-        let countData = NSData(bytesNoCopy: meanCountsBuffer.contents(), length: k * sizeof(UInt32), freeWhenDone: false)
-        countData.getBytes(&meanCounts, length: k * sizeof(UInt32))
-        
-        for i in 0..<k {
-            if meanCounts[i] != 0 {
-                for j in 0...3 {
-                    let totalSum = meanSums[i*4+j] + serialSums[i*4+j]
-                    let totalCounts = meanCounts[i] + serialCounts[i]
-                    means[i*4+j] = UInt8(totalSum / totalCounts)
-                }
-            }
-            else {
-                let randomPixel = Int(arc4random_uniform(UInt32(numPixelsInImage))) * 4
-                for j in 0...3 {
-                    means[i*4+j] = imgdata[randomPixel + j]
-                }
-            }
-        }
-
-        let end = CACurrentMediaTime()
-        print("Total Time for Means \(end - middle)")
-    }
-
-    
     
     func updateMeans() {
         let middle = CACurrentMediaTime()
@@ -273,21 +199,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         assign = assignments
         var meanSums = [UInt32](count: k*4, repeatedValue: 0)
         var meanCounts = [UInt32](count: k, repeatedValue: 0)
-        var nPixels = [UInt32(numPixelsInImage)]
+        var constants = [UInt32(numPixelsInImage), UInt32(k), UInt32(numGPUthreads), UInt32(threadGroupNumForUpdate)]
         
         let assignmentsBuffer = device.newBufferWithBytes(&assign, length: assign.count * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
         let meanSumsBuffer = device.newBufferWithBytes(&meanSums, length: k * 4 * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
         let meanCountsBuffer = device.newBufferWithBytes(&meanCounts, length: k * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
-        let numPixelsBuffer = device.newBufferWithBytes(&nPixels, length: sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
+        let constantsBuffer = device.newBufferWithBytes(&constants, length: constants.count * sizeof(UInt32), options: MTLResourceOptions.StorageModeShared)
 
         computeCommandEncoder?.setBuffer(inBuffer, offset: 0, atIndex: 0)
         computeCommandEncoder?.setBuffer(assignmentsBuffer, offset: 0, atIndex: 1)
         computeCommandEncoder?.setBuffer(meanSumsBuffer, offset: 0, atIndex: 2)
         computeCommandEncoder?.setBuffer(meanCountsBuffer, offset: 0, atIndex: 3)
-        computeCommandEncoder?.setBuffer(numPixelsBuffer, offset: 0, atIndex: 4)
+        computeCommandEncoder?.setBuffer(constantsBuffer, offset: 0, atIndex: 4)
         
-        let threadsPerGroup = MTLSize(width: 32, height: 1, depth: 1)
-        let numThreadGroups = MTLSize(width: 16, height: 1, depth: 1)
+        let threadsPerGroup = MTLSize(width: numGPUthreads, height: 1, depth: 1)
+        let numThreadGroups = MTLSize(width: threadGroupNumForUpdate, height: 1, depth: 1)
         computeCommandEncoder?.dispatchThreadgroups(numThreadGroups, threadsPerThreadgroup: threadsPerGroup)
         computeCommandEncoder?.endEncoding()
 
@@ -295,19 +221,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         commandBuffer?.commit()
         commandBuffer?.waitUntilCompleted()
         let b = CACurrentMediaTime()
-        print("GPU Time For Means\(b - a)")
+//        print("GPU Time For Means\(b - a)")
         
-        
+//        let z = CACurrentMediaTime()
+
         let sumData = NSData(bytesNoCopy: meanSumsBuffer.contents(), length: k * 4 * sizeof(UInt32), freeWhenDone: false)
         sumData.getBytes(&meanSums, length: k * 4 * sizeof(UInt32))
         
         let countData = NSData(bytesNoCopy: meanCountsBuffer.contents(), length: k * sizeof(UInt32), freeWhenDone: false)
         countData.getBytes(&meanCounts, length: k * sizeof(UInt32))
-        
+//        
+//        let zz = CACurrentMediaTime()
+//        print(zz - z)
         for i in 0..<k {
             if meanCounts[i] != 0 {
                 for j in 0...2 {
-                    let x = meanSums[i*4+j] / meanCounts[i]
                     means[i*4+j] = UInt8(meanSums[i*4+j] / meanCounts[i])
                 }
             }
@@ -318,13 +246,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
             }
         }
-        let end = CACurrentMediaTime()
-        print("Total Time for Means \(end - middle)")
+//        let end = CACurrentMediaTime()
+//        print("Total Time for Means \(end - middle)")
 
     }
 
     func updateImage() {
-        
         var computePipelineFilter: MTLComputePipelineState? = nil
         do {
             computePipelineFilter  = try device?.newComputePipelineStateWithFunction(updateImgMtl!)
@@ -384,9 +311,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         dispatch_async(dispatch_get_main_queue(), {
             self.picture.image = newImage
+            print("Width: \(w) Height: \(h)")
+            print("Number of pixels in image \(self.numPixelsInImage)")
+
         })
+        
     }
-    
     
     func updateMeansSerial() {
         let middle = CACurrentMediaTime()
@@ -415,6 +345,41 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
             }
         }
+        let end = CACurrentMediaTime()
+        print(end - middle)
+        
+    }
+    
+    func computeDistanceSerial() {
+        let middle = CACurrentMediaTime()
+        var r,g,b,a,w,x,y,z: Int!
+        var dist, minDist, closestMean: Int!
+        for i in 0..<numPixelsInImage {
+            r = Int(imgdata[i*4])
+            g = Int(imgdata[i*4 + 1])
+            b = Int(imgdata[i*4 + 2])
+            a = Int(imgdata[i*4 + 3])
+            minDist = 2147483647
+            closestMean = 0
+            for j in 0..<k {
+                w = abs(Int(means[j*4]) - r)
+                x = abs(Int(means[j*4]+1) - g)
+                y = abs(Int(means[j*4]+2) - b)
+                var l = Int(means[j*4]+3)
+                z = abs(l - a)
+                
+                dist = (w^^2) + (x^^2) + (y^^2) + (z^^2)
+                if (dist < minDist){
+                    closestMean = j
+                    minDist = dist
+                }
+                
+            }
+            
+            assignments[i] = UInt32(closestMean)
+        }
+        
+        
         let end = CACurrentMediaTime()
         print(end - middle)
     }
@@ -455,8 +420,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let newImage = UIImage(CGImage: cgim!)
         picture.image = newImage
+        
     }
-    
 
+}
+
+infix operator ^^ { }
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
 }
 
